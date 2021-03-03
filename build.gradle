@@ -26,9 +26,9 @@ dependencies {
     implementation "org.springframework:spring-context:${springframeworkVersion}"
 
     // An in-memory h2 database to test the application without the need for a real database
-    implementation group: 'com.h2database', name: 'h2', version: '1.3.148'
+    //implementation group: 'com.h2database', name: 'h2', version: '1.3.148'
     // The driver to connect to a real MySQL database
-    //implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
 
 
 
