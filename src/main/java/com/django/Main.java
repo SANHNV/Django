@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
 		System.out.println("Hello World!");
-		System.out.println(myApplicationContext.getBean(Test.class));
+		System.out.println(myApplicationContext.getBean(Test.class).test());
 		myApplicationContext.close();
 		return;
 	}
