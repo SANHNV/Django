@@ -1,18 +1,16 @@
 package com.django;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
+import com.django.test.Test;
 
-@Component
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 public class Main {
 
-
 	public static void main(String[] args) {
-		ApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+		AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
 		System.out.println("Hello World!");
-		System.out.println(myApplicationContext.getApplicationName());
-		System.out.println(myApplicationContext.getBean(Main.class));
+		System.out.println(myApplicationContext.getBean(Test.class));
+		myApplicationContext.close();
 		return;
 	}
 
