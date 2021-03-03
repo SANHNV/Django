@@ -1,7 +1,6 @@
 package com.django;
 
 import com.django.test.Test;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
