@@ -47,24 +47,10 @@ public class User {
 	}
 
 	/**
-	 * @param idUser the idUser to set
-	 */
-	public void setIdUser(Integer idUser) {
-		this.idUser = idUser;
-	}
-
-	/**
 	 * @return the firstName
 	 */
 	public String getFirstName() {
 		return firstName;
-	}
-
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
 	}
 
 	/**
@@ -75,24 +61,10 @@ public class User {
 	}
 
 	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
 	 * @return the login
 	 */
 	public String getLogin() {
 		return login;
-	}
-
-	/**
-	 * @param login the login to set
-	 */
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 	/**
@@ -103,24 +75,10 @@ public class User {
 	}
 
 	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
 	 * @return the salt
 	 */
 	public String getSalt() {
 		return salt;
-	}
-
-	/**
-	 * @param salt the salt to set
-	 */
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 
 	/**
@@ -129,14 +87,7 @@ public class User {
 	public String getRole() {
 		return role;
 	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
 	
     //#endregion
-    
+
 }
