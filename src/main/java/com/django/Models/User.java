@@ -10,7 +10,7 @@ public class User {
     private String login;
     private String password;
     private String salt;
-    private String role;
+    private Roles role;
 
     //#endregion
     
@@ -24,7 +24,7 @@ public class User {
 	 * @param password
 	 * @param role
 	 */
-	public User(Integer idUser, String firstName, String lastName, String login, String password, String salt, String role) {
+	public User(Integer idUser, String firstName, String lastName, String login, String password, String salt, Roles role) {
 		super();
 		this.idUser = idUser;
 		this.firstName = firstName;
@@ -84,7 +84,7 @@ public class User {
 	/**
 	 * @return the role
 	 */
-	public String getRole() {
+	public Roles getRole() {
 		return role;
 	}
 	
