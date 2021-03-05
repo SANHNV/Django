@@ -28,6 +28,7 @@ public class User {
     //#region Constructor
 
 	/**
+     * Constructor
 	 * @param idUser
 	 * @param firstName
 	 * @param lastName

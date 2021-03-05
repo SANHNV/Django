@@ -11,8 +11,9 @@
 ## II. Hibernate
 + add hibernate dependance in build.gradle
 + POJO :
-    + product : ID, Name (String), ProductCode (Integer), Quantity (double), LimiteDate (timeStamp), Type (String)
+    + product : ID, Name (String), ProductCode (Integer), Quantity (double), LimiteDate (timeStamp), Image (String)
     + user : ID, Login (String), Password (String)
++ add annotations to pojo
 
 
 + SessionFactory handle Session (atomic use => transaction)

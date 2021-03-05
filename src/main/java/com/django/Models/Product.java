@@ -1,5 +1,7 @@
 package com.django.Models;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,23 +21,32 @@ public class Product {
     private String price;
     @Basic(optional = false)
     private String image;
+    @Basic(optional = false)
+    private Timestamp limitDate;
+    @Basic(optional = false)
+    private double quantity;
 
     //#endregion
         
     //#region Constructor
     
 	/**
-	 * @param idProduct
-	 * @param name
-	 * @param price
-	 * @param image
-	 */
-	public Product(Integer idProduct, String name, String price, String image) {
+     * Constructor
+     * @param idProduct
+     * @param name
+     * @param price
+     * @param image
+     * @param limitDate
+     * @param quantity
+     */
+	public Product(Integer idProduct, String name, String price, String image, Timestamp limitDate, double quantity) {
 		super();
 		this.idProduct = idProduct;
 		this.name = name;
 		this.price = price;
 		this.image = image;
+        this.limitDate = limitDate;
+        this.quantity = quantity;
 	}
 	
     //#endregion
@@ -61,7 +72,7 @@ public class Product {
 	/**
 	 * @return the price
 	 */
-    @Column(name = "Price", nullable = false)
+    @Column(name = "price", nullable = false)
 	public String getPrice() {
 		return price;
 	}
@@ -73,6 +84,22 @@ public class Product {
     @Column(name = "image", nullable = false, columnDefinition = "String default placeholder.png")
 	public String getImage() {
 		return image;
+	}
+
+    /**
+	 * @return the limit date
+	 */
+    @Column(name = "limitDate", nullable = false)
+	public Timestamp getLimitDate() {
+		return limitDate;
+	}
+
+    /**
+	 * @return the quantity
+	 */
+    @Column(name = "quantity", nullable = false)
+	public double getQuantity() {
+		return quantity;
 	}
     
     //#endregion
