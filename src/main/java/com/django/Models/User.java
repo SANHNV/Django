@@ -1,15 +1,26 @@
 package com.django.Models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = {"login"}))
 public class User {
     
     //#region Private Properties
 
+    @Id
 	private Integer idUser;
+    @Basic(optional = false)
     private String firstName;
+    @Basic(optional = false)
     private String lastName;
+    @Basic(optional = false)
     private String login;
+    @Basic(optional = false)
     private String password;
+    @Basic(optional = false)
     private String salt;
+    @Basic(optional = false)
     private Roles role;
 
     //#endregion
@@ -42,6 +53,7 @@ public class User {
 	/**
 	 * @return the idUser
 	 */
+    @Column(name = "idUser", nullable = false)
 	public Integer getIdUser() {
 		return idUser;
 	}
@@ -49,6 +61,7 @@ public class User {
 	/**
 	 * @return the firstName
 	 */
+    @Column(name = "firstName", nullable = false)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -56,6 +69,7 @@ public class User {
 	/**
 	 * @return the lastName
 	 */
+    @Column(name = "lastName", nullable = false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -63,6 +77,7 @@ public class User {
 	/**
 	 * @return the login
 	 */
+    @Column(name = "login", nullable = false)
 	public String getLogin() {
 		return login;
 	}
@@ -70,6 +85,7 @@ public class User {
 	/**
 	 * @return the password
 	 */
+    @Column(name = "password", nullable = false)
 	public String getPassword() {
 		return password;
 	}
@@ -77,6 +93,7 @@ public class User {
 	/**
 	 * @return the salt
 	 */
+    @Column(name = "salt", nullable = false)
 	public String getSalt() {
 		return salt;
 	}
@@ -84,6 +101,7 @@ public class User {
 	/**
 	 * @return the role
 	 */
+    @Column(name = "role", nullable = false, columnDefinition = "int default 0")
 	public Roles getRole() {
 		return role;
 	}

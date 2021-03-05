@@ -1,12 +1,23 @@
 package com.django.Models;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Product")
 public class Product {
 
     //#region Private Properties
-	
-	private Integer idProduit;
+	@Id
+	private Integer idProduct;
+    @Basic(optional = false)
     private String name;
+    @Basic(optional = false)
     private String price;
+    @Basic(optional = false)
     private String image;
 
     //#endregion
@@ -14,14 +25,14 @@ public class Product {
     //#region Constructor
     
 	/**
-	 * @param idProduit
+	 * @param idProduct
 	 * @param name
 	 * @param price
 	 * @param image
 	 */
-	public Product(Integer idProduit, String name, String price, String image) {
+	public Product(Integer idProduct, String name, String price, String image) {
 		super();
-		this.idProduit = idProduit;
+		this.idProduct = idProduct;
 		this.name = name;
 		this.price = price;
 		this.image = image;
@@ -32,15 +43,17 @@ public class Product {
     //#region Getter & Setter
 
 	/**
-	 * @return the idProduit
+	 * @return the idProduct
 	 */
-	public Integer getIdProduit() {
-		return idProduit;
+    @Column(name = "idProduct", nullable = false)
+	public Integer getIdProduct() {
+		return idProduct;
 	}
 
 	/**
 	 * @return the name
 	 */
+    @Column(name = "name", nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -48,6 +61,7 @@ public class Product {
 	/**
 	 * @return the price
 	 */
+    @Column(name = "Price", nullable = false)
 	public String getPrice() {
 		return price;
 	}
@@ -55,6 +69,8 @@ public class Product {
 	/**
 	 * @return the image
 	 */
+    // SI CA PLANTE C'EST LA
+    @Column(name = "image", nullable = false, columnDefinition = "String default placeholder.png")
 	public String getImage() {
 		return image;
 	}
