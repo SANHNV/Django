@@ -28,12 +28,13 @@ public class User {
     //#region Constructor
 
 	/**
-     * Constructor
+	 * Constructor
 	 * @param idUser
 	 * @param firstName
 	 * @param lastName
 	 * @param login
 	 * @param password
+	 * @param salt
 	 * @param role
 	 */
 	public User(Integer idUser, String firstName, String lastName, String login, String password, String salt, Roles role) {

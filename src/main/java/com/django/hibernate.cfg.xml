@@ -16,7 +16,7 @@
         <!-- Database connection settings -->
 		<!-- MySQL DB-->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost/chartreuse?useUnicode=true;useJDBCCompliantTimezoneShift=true;useLegacyDatetimeCode=false;serverTimezone=UTC</property>
+        <property name="connection.url">jdbc:mysql://localhost/chartreuse</property>
 		
 		<!-- H2 DB 
         <property name="connection.driver_class">org.h2.Driver</property>
