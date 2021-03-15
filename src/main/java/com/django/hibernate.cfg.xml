@@ -55,7 +55,6 @@
 
         <!-- Example of annotated entity class -->
         <mapping class="com.django.Models.Product"/>
-        <mapping class="com.django.Models.Roles"/>
         <mapping class="com.django.Models.User"/>
 
         <!-- Example of XML mappings -->

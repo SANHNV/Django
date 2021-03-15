@@ -14,6 +14,10 @@
     + product : ID, Name (String), ProductCode (Integer), Quantity (double), LimiteDate (timeStamp), Image (String)
     + user : ID, Login (String), Password (String)
 + add annotations to pojo
++ Hibernate :
+    + Edit config hibernate : use thread
+    + Try connection to database
+    + Create configuration
 
 
 + SessionFactory handle Session (atomic use => transaction)

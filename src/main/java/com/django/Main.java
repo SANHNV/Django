@@ -13,10 +13,15 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+
 		System.out.println("Hello World!");
+
+		//Test Injection of Dependence
+		AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
 		System.out.println(myApplicationContext.getBean(Test.class).test());
 		myApplicationContext.close();
+
+		//Test Hibernate
 		User user = new User(1, "firstName", "lastName", "login", "password", "salt", Roles.adminGlobal);
 		try {
             SessionFactory sessionFactory = new Configuration().configure("/com/django/hibernate.cfg.xml").buildSessionFactory();
