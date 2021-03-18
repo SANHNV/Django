@@ -47,19 +47,16 @@ public class SpringHibernateConfig {
 
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty(
-            //"hibernate.hbm2ddl.auto", "create-drop");
-            "hibernate.hbm2ddl.auto", "update");
-        hibernateProperties.setProperty(
-            "hibernate.dialect", "org.hibernate.dialect.MySQL55Dialect");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+        //"hibernate.hbm2ddl.auto", "create-drop");
+        
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL55Dialect");
 
         // Bind one session per request : configures SessionFactory.useCurrentSession()
-        hibernateProperties.setProperty(
-            "hibernate.current_session_context_class", "thread");
+        //hibernateProperties.setProperty("hibernate.current_session_context_class", "thread");
 
         // Disable the second-level cache
-        hibernateProperties.setProperty(
-            "cache.provider_class", "org.hibernate.cache.internal.NoCacheProvider");
+        hibernateProperties.setProperty("cache.provider_class", "org.hibernate.cache.internal.NoCacheProvider");
 
         return hibernateProperties;
     }

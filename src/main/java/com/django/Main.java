@@ -19,8 +19,10 @@ public class Main {
 		System.out.println(myApplicationContext.getBean(Test.class).test());
 		try{
 			//Test Hibernate
-			User user = new User(100, "test", "test", "test", "test", "test", Roles.adminGlobal);
+			User user = new User(2, "test10", "test10", "test10", "test10", "test10", Roles.adminGlobal);
 			System.out.println(myApplicationContext.getBean(AddUserTR.class).getUserById(1).getFirstName());
+
+			myApplicationContext.getBean(AddUserTR.class).saveUser(user);
         } catch(HibernateException e) {
             e.printStackTrace();
         }
