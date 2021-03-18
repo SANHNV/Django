@@ -27,6 +27,8 @@ public class User {
     
     //#region Constructor
 
+	public User(){}
+
 	/**
 	 * Constructor
 	 * @param idUser

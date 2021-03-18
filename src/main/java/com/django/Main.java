@@ -1,13 +1,11 @@
 package com.django;
 
+import com.django.Configuration.AddUserTR;
 import com.django.Models.Roles;
 import com.django.Models.User;
 import com.django.test.Test;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
@@ -19,20 +17,14 @@ public class Main {
 		//Test Injection of Dependence
 		AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
 		System.out.println(myApplicationContext.getBean(Test.class).test());
-		myApplicationContext.close();
-
-		//Test Hibernate
-		User user = new User(1, "firstName", "lastName", "login", "password", "salt", Roles.adminGlobal);
-		try {
-            SessionFactory sessionFactory = new Configuration().configure("/com/django/hibernate.cfg.xml").buildSessionFactory();
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
-
+		try{
+			//Test Hibernate
+			User user = new User(100, "test", "test", "test", "test", "test", Roles.adminGlobal);
+			System.out.println(myApplicationContext.getBean(AddUserTR.class).getUserById(1).getFirstName());
         } catch(HibernateException e) {
             e.printStackTrace();
         }
+		myApplicationContext.close();
 
 		return;
 	}
