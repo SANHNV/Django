@@ -1,8 +1,7 @@
 package com.django;
 
 import com.django.Configuration.AddUserTR;
-import com.django.Models.Roles;
-import com.django.Models.User;
+import com.django.Controllers.HomeController;
 import com.django.test.Test;
 
 import org.hibernate.HibernateException;
@@ -21,13 +20,14 @@ public class Application {
 
 		//Test Injection of Dependence
 		AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+		myApplicationContext.getBean(HomeController.class).home();
 		System.out.println(myApplicationContext.getBean(Test.class).test());
 		try{
 			//Test Hibernate
-			User user = new User(3, "test10", "test10", "test101", "test10", "test10", Roles.adminGlobal);
+			//User user = new User(5, "test10", "test10", "login404", "test10", "test10", Roles.adminGlobal);
 			System.out.println(myApplicationContext.getBean(AddUserTR.class).getUserById(1).getFirstName());
 
-			myApplicationContext.getBean(AddUserTR.class).saveUser(user);
+			//myApplicationContext.getBean(AddUserTR.class).saveUser(user);
         } catch(HibernateException e) {
             e.printStackTrace();
         }
