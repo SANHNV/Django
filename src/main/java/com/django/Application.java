@@ -1,11 +1,11 @@
 package com.django;
 
-import com.django.Configuration.AddUserTR;
-import com.django.Controllers.HomeController;
-import com.django.test.Test;
+// import com.django.Configuration.AddUserTR;
+// import com.django.Controllers.HomeController;
+// import com.django.test.Test;
 
-import org.hibernate.HibernateException;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+// import org.hibernate.HibernateException;
+// import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,10 +17,10 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 
 		System.out.println("Hello World!");
-
+		/*
 		//Test Injection of Dependence
 		AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-		myApplicationContext.getBean(HomeController.class).home();
+		myApplicationContext.getBean(HomeController.class).home(null, null);
 		System.out.println(myApplicationContext.getBean(Test.class).test());
 		try{
 			//Test Hibernate
@@ -32,7 +32,7 @@ public class Application {
             e.printStackTrace();
         }
 		myApplicationContext.close();
-
+		*/
 		return;
 	}
 

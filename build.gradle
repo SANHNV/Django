@@ -27,6 +27,7 @@ dependencies {
 
     // -- Partie IV -- //
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'javax.servlet:jstl:1.1.2'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' // loads JSP pages
     implementation 'org.hibernate:hibernate-core:5.4.10.Final' // add Hibernate
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
