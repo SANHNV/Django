@@ -24,7 +24,7 @@ public class CreateProductController {
         List<Product> products = myApplicationContext.getBean(ProductTR.class).getProducts();
         
         Date d = new Date();
-        Product temp = new Product(products.size()+1,"test","10,00","",new Timestamp(d.getTime()),2.2);
+        Product temp = new Product("test","10,00","",new Timestamp(d.getTime()),2.2);
         model.addAttribute("name", name);
         myApplicationContext.getBean(ProductTR.class).saveProduct(temp);
 

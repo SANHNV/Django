@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,6 +16,7 @@ public class Product {
 
     //#region Private Properties
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idProduct;
     @Basic(optional = false)
     private String name;
@@ -42,6 +45,15 @@ public class Product {
 	public Product(Integer idProduct, String name, String price, String image, Timestamp limitDate, double quantity) {
 		super();
 		this.idProduct = idProduct;
+		this.name = name;
+		this.price = price;
+		this.image = image;
+        this.limitDate = limitDate;
+        this.quantity = quantity;
+	}
+
+	public Product(String name, String price, String image, Timestamp limitDate, double quantity) {
+		super();
 		this.name = name;
 		this.price = price;
 		this.image = image;
