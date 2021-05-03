@@ -24,4 +24,10 @@ public class ProductTR {
 		Session session = sessionFactory.getCurrentSession();
         session.save(product);
 	}
+
+    //get all product
+
+    //edit product
+
+    //delete product
 }
