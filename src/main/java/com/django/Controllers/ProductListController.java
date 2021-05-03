@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class HomeController {
+public class ProductListController {
     
-    @RequestMapping({"/", "/hello"})
-    public String hola(@RequestParam(value = "name", defaultValue = "World", required = true) String name, Model model) {
-        System.out.println("controller hello");
+    @RequestMapping({"/productList"})
+    public String showProducts(@RequestParam(value = "name", defaultValue = "World", required = true) String name, Model model) {
+        System.out.println("controller products");
         model.addAttribute("name", name);
-        return "homeView";
+        return "productListView";
     }
 
     // @RequestMapping("/")
