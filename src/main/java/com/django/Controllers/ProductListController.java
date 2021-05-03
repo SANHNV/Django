@@ -14,6 +14,8 @@ import java.util.List;
 import com.django.Models.Product;
 import com.django.Configuration.ProductTR;
 
+//TODO: put all database TR in service
+
 
 @Controller
 public class ProductListController {
@@ -34,6 +36,8 @@ public class ProductListController {
     @RequestMapping({"/createProduct"})
     public String createProduct(@RequestParam(value = "error", defaultValue = "", required = true) String error, Model model) {
         System.out.println("controller products create");
+
+        //test
         Product product = new Product(123, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
         model.addAttribute("product", product);
         return "createProductView";
@@ -52,10 +56,13 @@ public class ProductListController {
     public String editProduct(@RequestBody Product product) {
         System.out.println("controller products edit product");
         //if product model valid
-        //  if id == 0
-        //    create new product
-        //   else
-        //     edit product
+        if(product.getIdProduct() == 0){
+            AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+            myApplicationContext.getBean(ProductTR.class).saveProduct(product);
+            myApplicationContext.close();
+        } else {
+            //edit save
+        }
         //else
         // return "redirect:/productList?errorString=errorAddProduct";
         return "redirect:/productList";

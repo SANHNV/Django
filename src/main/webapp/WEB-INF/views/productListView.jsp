@@ -16,7 +16,7 @@
  
     <table border="1" cellpadding="5" cellspacing="1" >
        <tr>
-          <th>idProduct</th>
+          <th>Code</th>
           <th>Name</th>
           <th>Price</th>
           <th>Edit</th>

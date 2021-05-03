@@ -49,6 +49,9 @@ public class Product {
         this.quantity = quantity;
 	}
 	
+	/**
+	 * Constructor (empty)
+	 */
 	public Product(){}
 
     //#endregion

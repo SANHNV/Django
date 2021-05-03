@@ -9,6 +9,8 @@
  <body>
  
     <jsp:include page="_menu.jsp"></jsp:include>
+
+    <!--TODO: CREATE FORM-->
  
     <h3>Product List</h3>
  
