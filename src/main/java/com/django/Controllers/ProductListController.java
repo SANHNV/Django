@@ -38,8 +38,8 @@ public class ProductListController {
         System.out.println("controller products create");
 
         //test
-        Product product = new Product(123, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
-        model.addAttribute("product", product);
+        //Product product = new Product(0, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
+        //model.addAttribute("product", product);
         return "createProductView";
     }
 
