@@ -1,11 +1,9 @@
 package com.django.Configuration;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.django.Models.Product;
-import com.mysql.cj.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,8 +26,9 @@ public class ProductTR {
 		return sessionFactory.getCurrentSession().createNativeQuery("select * from Product", Product.class).getResultList();
 	}
 
-	public void saveUser(Product product) {
+	public Product saveProduct(Product p){
 		Session session = sessionFactory.getCurrentSession();
-        session.save(product);
+        session.save(p);
+		return p;
 	}
 }
