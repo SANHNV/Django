@@ -1,6 +1,8 @@
 package com.django.Configuration;
 
 
+import java.util.List;
+
 import com.django.Models.Product;
 
 import org.hibernate.Session;
@@ -20,9 +22,14 @@ public class ProductTR {
 		return sessionFactory.getCurrentSession().createQuery("select d from Product d where d.id = :id", Product.class).setParameter("id", id).getSingleResult();
 	}
 
-	public void saveUser(Product product) {
+	public List<Product> getProducts(){
+		return sessionFactory.getCurrentSession().createNativeQuery("select * from Product", Product.class).getResultList();
+	}
+
+	public Product saveProduct(Product p){
 		Session session = sessionFactory.getCurrentSession();
-        session.save(product);
+        session.save(p);
+		return p;
 	}
 
     //get all product

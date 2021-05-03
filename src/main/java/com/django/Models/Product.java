@@ -49,6 +49,8 @@ public class Product {
         this.quantity = quantity;
 	}
 	
+	public Product(){}
+
     //#endregion
 
     //#region Getter & Setter

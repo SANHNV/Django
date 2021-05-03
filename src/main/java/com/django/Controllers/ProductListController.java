@@ -5,12 +5,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Controller;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.django.Models.Product;
+import com.django.Configuration.ProductTR;
 
-import org.springframework.stereotype.Controller;
 
 @Controller
 public class ProductListController {
@@ -18,8 +21,12 @@ public class ProductListController {
     @RequestMapping({"/productList"})
     public String showProducts(@RequestParam(value = "error", defaultValue = "", required = true) String error, Model model) {
         System.out.println("controller products list");
-
         //get all products
+        AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+        List<Product> products = myApplicationContext.getBean(ProductTR.class).getProducts();
+        model.addAttribute("productList",products);
+        System.out.println(products.size());
+        myApplicationContext.close();
         model.addAttribute("errorString", error);
         return "productListView";
     }
