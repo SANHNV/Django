@@ -83,7 +83,6 @@ public class ProductListController {
     public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
         System.out.println("controller delete product");
         //if or try
-        //TODO: call delete product method
 
         AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
         myApplicationContext.getBean(ProductTR.class).deleteProduct(Integer.parseInt(code));

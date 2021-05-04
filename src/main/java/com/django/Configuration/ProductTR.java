@@ -74,8 +74,10 @@ public class ProductTR {
      */
 	public void deleteProduct(int id){
 		Product p = getProductById(id);
-		Session session = sessionFactory.getCurrentSession();
-		session.delete(p);
-		session.flush();
+		if(p != null){
+			Session session = sessionFactory.getCurrentSession();
+			session.delete(p);
+			session.flush();
+		}
 	}
 }
