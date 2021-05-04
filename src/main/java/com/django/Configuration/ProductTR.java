@@ -24,7 +24,13 @@ public class ProductTR {
      * @return product
      */
     public Product getProductById(Integer id) {
-		return sessionFactory.getCurrentSession().createQuery("select d from Product d where d.id = :id", Product.class).setParameter("id", id).getSingleResult();
+		Product p = new Product();
+		try {
+			p = sessionFactory.getCurrentSession().createQuery("select d from Product d where d.id = :id", Product.class).setParameter("id", id).getSingleResult();
+		} catch (Exception e) {
+			p = null;
+		}
+		return p;
 	}
 
     /**
@@ -54,7 +60,7 @@ public class ProductTR {
 		Product p = getProductById(_p.getIdProduct());
 		Session session = sessionFactory.getCurrentSession();
 		if(p == null){
-			//TODO: create a new product
+			saveProduct(_p);
 		}
 		else{
 			session.evict(p);
