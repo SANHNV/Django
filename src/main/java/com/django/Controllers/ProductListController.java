@@ -46,7 +46,7 @@ public class ProductListController {
     @RequestMapping("/editProduct")
     public String editProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String name, Model model) {
         System.out.println("controller products get edit view");
-        //get product by id
+        //TODO: get product by id
         Product product = new Product(123, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
         model.addAttribute("product", product);
         return "createProductView";
@@ -61,7 +61,7 @@ public class ProductListController {
             myApplicationContext.getBean(ProductTR.class).saveProduct(product);
             myApplicationContext.close();
         } else {
-            //edit save
+            //TODO: add edit save
         }
         //else
         // return "redirect:/productList?errorString=errorAddProduct";
@@ -72,7 +72,7 @@ public class ProductListController {
     public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String name, Model model) {
         System.out.println("controller products create");
         //if or try
-        //call delete product method
+        //TODO: call delete product method
         //else or catch
         model.addAttribute("errorString", "error with delete");
         return "redirect:/productList";
