@@ -46,7 +46,10 @@ public class ProductTR {
 		return product;
 	}
 
-    //TODO: edit product
+	/**
+     * Save the changed Product
+     * @param product _p
+     */
 	public void editProduct(Product _p){
 		Product p = getProductById(_p.getIdProduct());
 		Session session = sessionFactory.getCurrentSession();
@@ -59,5 +62,14 @@ public class ProductTR {
 		}
 	}
 
-    //TODO: delete product
+	/**
+     * Delete a product with it's id
+     * @param int id
+     */
+	public void deleteProduct(int id){
+		Product p = getProductById(id);
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(p);
+		session.flush();
+	}
 }
