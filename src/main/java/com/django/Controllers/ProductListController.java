@@ -44,10 +44,14 @@ public class ProductListController {
     }
 
     @RequestMapping("/editProduct")
-    public String editProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String name, Model model) {
+    public String editProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
         System.out.println("controller products get edit view");
-        //TODO: get product by id
-        Product product = new Product(123, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
+        //TODO: handle if the product doesn't exist
+
+        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+        Product product = myApplicationContext.getBean(ProductTR.class).getProductById(Integer.parseInt(code));
+        myApplicationContext.close();
+
         model.addAttribute("product", product);
         return "createProductView";
     }
@@ -69,7 +73,7 @@ public class ProductListController {
     }
 
     @RequestMapping({"/deleteProduct"})
-    public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String name, Model model) {
+    public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
         System.out.println("controller products create");
         //if or try
         //TODO: call delete product method

@@ -47,6 +47,17 @@ public class ProductTR {
 	}
 
     //TODO: edit product
+	public void editProduct(Product _p){
+		Product p = getProductById(_p.getIdProduct());
+		Session session = sessionFactory.getCurrentSession();
+		if(p == null){
+			//TODO: create a new product
+		}
+		else{
+			session.evict(p);
+			session.update(_p);
+		}
+	}
 
     //TODO: delete product
 }
