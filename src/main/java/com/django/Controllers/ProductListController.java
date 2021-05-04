@@ -77,6 +77,11 @@ public class ProductListController {
         System.out.println("controller products create");
         //if or try
         //TODO: call delete product method
+
+        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+        myApplicationContext.getBean(ProductTR.class).deleteProduct(Integer.parseInt(code));
+        myApplicationContext.close();
+
         //else or catch
         model.addAttribute("errorString", "error with delete");
         return "redirect:/productList";
