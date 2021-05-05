@@ -72,7 +72,7 @@ public class ProductListController {
     public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String name, Model model) {
         System.out.println("controller products create");
         //if or try
-        //TODO: call delete product method
+        //Todo: call delete product method
         //else or catch
         model.addAttribute("errorString", "error with delete");
         return "redirect:/productList";

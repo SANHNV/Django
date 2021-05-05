@@ -2,6 +2,9 @@ package com.django.Models;
 
 import javax.persistence.*;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 @Entity
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = {"login"}))
 public class User {
@@ -9,10 +12,11 @@ public class User {
     //#region Private Properties
 
     @Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idUser;
     @Basic(optional = false)
     private String firstName;
-    @Basic(optional = false)
+	@Basic(optional = false)
     private String lastName;
     @Basic(optional = false)
     private String login;
@@ -26,8 +30,6 @@ public class User {
     //#endregion
     
     //#region Constructor
-
-	public User(){}
 
 	/**
 	 * Constructor
@@ -49,6 +51,30 @@ public class User {
 		this.salt = salt;
 		this.role = role;
 	}
+
+	/**
+	 * Constructor (without id)
+	 * @param firstName
+	 * @param lastName
+	 * @param login
+	 * @param password
+	 * @param salt
+	 * @param role
+	 */
+	public User(String firstName, String lastName, String login, String password, String salt, Roles role) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.login = login;
+		this.password = password;
+		this.salt = salt;
+		this.role = role;
+	}
+
+	/**
+	 * Constructor (empty)
+	 */
+	public User(){}
 
     //#endregion
 
