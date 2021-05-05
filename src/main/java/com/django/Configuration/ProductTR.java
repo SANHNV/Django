@@ -24,7 +24,13 @@ public class ProductTR {
      * @return product
      */
     public Product getProductById(Integer id) {
-		return sessionFactory.getCurrentSession().createQuery("select d from Product d where d.id = :id", Product.class).setParameter("id", id).getSingleResult();
+		Product p = new Product();
+		try {
+			p = sessionFactory.getCurrentSession().createQuery("select d from Product d where d.id = :id", Product.class).setParameter("id", id).getSingleResult();
+		} catch (Exception e) {
+			p = null;
+		}
+		return p;
 	}
 
     /**
@@ -46,7 +52,32 @@ public class ProductTR {
 		return product;
 	}
 
-    //TODO: edit product
+	/**
+     * Save the changed Product
+     * @param product _p
+     */
+	public void editProduct(Product _p){
+		Product p = getProductById(_p.getIdProduct());
+		Session session = sessionFactory.getCurrentSession();
+		if(p == null){
+			saveProduct(_p);
+		}
+		else{
+			session.evict(p);
+			session.update(_p);
+		}
+	}
 
-    //TODO: delete product
+	/**
+     * Delete a product with it's id
+     * @param int id
+     */
+	public void deleteProduct(int id){
+		Product p = getProductById(id);
+		if(p != null){
+			Session session = sessionFactory.getCurrentSession();
+			session.delete(p);
+			session.flush();
+		}
+	}
 }

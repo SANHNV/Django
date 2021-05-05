@@ -37,6 +37,11 @@ public class ProductListController {
     public String createProduct(@RequestParam(value = "error", defaultValue = "", required = true) String error, Model model) {
         System.out.println("controller products create");
 
+        Product product = new Product(0, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
+
+        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+        myApplicationContext.getBean(ProductTR.class).saveProduct(product);
+        myApplicationContext.close();
         //test
         //Product product = new Product(0, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
         //model.addAttribute("product", product);
@@ -44,10 +49,16 @@ public class ProductListController {
     }
 
     @RequestMapping("/editProduct")
-    public String editProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String name, Model model) {
+    public String editProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
         System.out.println("controller products get edit view");
-        //TODO: get product by id
-        Product product = new Product(123, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
+
+        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+        Product product = myApplicationContext.getBean(ProductTR.class).getProductById(Integer.parseInt(code));
+        myApplicationContext.close();
+        if(product == null){
+            return "redirect:/productList?errorString=ProductNotFound";
+        }
+
         model.addAttribute("product", product);
         return "createProductView";
     }
@@ -69,10 +80,12 @@ public class ProductListController {
     }
 
     @RequestMapping({"/deleteProduct"})
-    public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String name, Model model) {
-        System.out.println("controller products create");
+    public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
+        System.out.println("controller delete product");
         //if or try
-        //Todo: call delete product method
+        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
+        myApplicationContext.getBean(ProductTR.class).deleteProduct(Integer.parseInt(code));
+        myApplicationContext.close();
         //else or catch
         model.addAttribute("errorString", "error with delete");
         return "redirect:/productList";
