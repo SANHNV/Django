@@ -21,19 +21,19 @@
     <table>
       <tr>
         <td><form:label path="firstName">FirstName</form:label></td>
-        <td><form:input path="firstName"/></td>
+        <td><form:input type="text" required="true" path="firstName"/></td>
       </tr>
       <tr>
         <td><form:label path="lastName">LastName</form:label></td>
-        <td><form:input path="lastName"/></td>
+        <td><form:input type="text" required="true" path="lastName"/></td>
       </tr>
       <tr>
         <td><form:label path="login">Login</form:label></td>
-        <td><form:input path="login"/></td>
+        <td><form:input type="text" required="true" path="login"/></td>
       </tr>
       <tr>
         <td><form:label path="password">Password</form:label></td>
-        <td><form:input path="password"/></td>
+        <td><form:input type="password" required="true" path="password"/></td>
       </tr>
       <tr>
         <td><input type="submit" value="Submit" /></td>
