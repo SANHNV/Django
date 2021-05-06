@@ -94,7 +94,6 @@ public class AccountController {
      */
     @RequestMapping(value = "/checkUser", method = RequestMethod.POST)
     public ModelAndView checkUser(String login, String password) {
-        System.out.println("controller add user");
         try{
             if(ServiceUser.checkUser(login, password)){
                 User user = ServiceUser.getUserByLogin(login);

@@ -4,69 +4,71 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <html>
- <head>
+  <head>
     <meta charset="UTF-8">
     <title>Product List</title>
- </head>
- <body>
+  </head>
+  <body>
  
     <jsp:include page="_menu.jsp"></jsp:include>
-
-    <!--TODO: CREATE FORM-->
  
     <h3>Product List</h3>
  
     <p style="color: red;">${errorString}</p>
  
-    <table border="1" cellpadding="5" cellspacing="1" >
-      <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>LimitDate</th>
-        <th>Image URL</th>
-        <th>Quantity</th>
-      </tr>
-      <tr>
-        <td>${product.idProduct}</td>
-        <td>${product.name}</td>
-        <td>${product.price}</td>
-        <td>${date}</td>
-        <td>${product.image}</td>
-        <td>${product.quantity}</td>
-      </tr>
-    </table>
+    <c:if test="${product.image != null}">
+      <table border="1" cellpadding="5" cellspacing="1" >
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>LimitDate</th>
+          <th>Image URL</th>
+          <th>Image rendu</th>
+          <th>Quantity</th>
+        </tr>
+        <tr>
+          <td>${product.idProduct}</td>
+          <td>${product.name}</td>
+          <td>${product.price}</td>
+          <td>${date}</td>
+          <td>${product.image}</td>
+          <td><img src="${product.image}" width="100" height="100"> </td>
+          <td>${product.quantity}</td>
+        </tr>
+      </table>
+    </c:if>
 
     <form:form method="POST" action="/createP" modelAttribute="product">
-    <table>
-      <tr>
-        <td><form:input path="idProduct" value="${code}" type="text" hidden="true"/></td>
-      </tr>
-      <tr>
-        <td><form:label path="name">Name</form:label></td>
-        <td><form:input path="name" type="text" required="true" /></td>
-      </tr>
-      <tr>
-        <td><form:label path="price">price</form:label></td>
-        <td><form:input path="price" type="text" required="true" /></td>
-      </tr>
-      <tr>
-        <td><form:label path="image">image</form:label></td>
-        <td><form:input path="image" type="text" required="true" /></td>
-      </tr>
-      <tr>
-        <td><form:label path="limitDate">limitDate</form:label></td>
-        <td><form:input path="limitDate" type="date" required="true" /></td>
-      </tr>
-      <tr>
-        <td><form:label path="quantity">quantity</form:label></td>
-        <td><form:input path="quantity" type="number" step="0.01" required="true" /></td>
-      </tr>
-      <tr>
-        <td><input type="submit" value="Submit" /></td>
-      </tr>
-    </table>
-  </form:form>
+      <table>
+        <tr>
+          <td><form:input path="idProduct" value="${code}" type="text" hidden="true"/></td>
+        </tr>
+        <tr>
+          <td><form:label path="name">Name</form:label></td>
+          <td><form:input path="name" type="text" required="true" /></td>
+        </tr>
+        <tr>
+          <td><form:label path="price">price</form:label></td>
+          <td><form:input path="price" type="text" required="true" /></td>
+        </tr>
+        <tr>
+          <td><form:label path="image">image</form:label></td>
+          <td><form:input path="image" type="text" required="true" /></td>
+        </tr>
+        <tr>
+          <td><form:label path="limitDate">limitDate</form:label></td>
+          <td><form:input path="limitDate" type="date" required="true" /></td>
+        </tr>
+        <tr>
+          <td><form:label path="quantity">quantity</form:label></td>
+          <td><form:input path="quantity" type="number" step="0.01" required="true" /></td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Submit" /></td>
+        </tr>
+      </table>
+    </form:form>
   
- </body>
+  </body>
 </html>

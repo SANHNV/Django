@@ -5,11 +5,14 @@
    <a href="${pageContext.request.contextPath}/">Home</a>
    |
    <a href="${pageContext.request.contextPath}/productList">Product List</a>
-   |
-   <a href="${pageContext.request.contextPath}/userInfo">My Account Info</a>
-   |
-   <a href="${pageContext.request.contextPath}/login">Login</a>
-   |
-   <a href="${pageContext.request.contextPath}/signin">SignIn</a>
-    
+   <c:if test="${sessionScope.user != null }">
+      |
+      <a href="${pageContext.request.contextPath}/userInfo">My Account Info</a>
+   </c:if>
+   <c:if test="${sessionScope.user == null }">
+      |
+      <a href="${pageContext.request.contextPath}/login">Login</a>
+      |
+      <a href="${pageContext.request.contextPath}/signin">SignIn</a>
+   </c:if>   
 </div>  

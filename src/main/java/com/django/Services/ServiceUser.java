@@ -29,7 +29,7 @@ public class ServiceUser {
      * @param lastName
      * @param login
      * @param password
-     * @return User created or
+     * @return User created or null
      */
     public static User createUser(String firstName, String lastName, String login, String password){
         User user = null;
@@ -38,8 +38,7 @@ public class ServiceUser {
                 byte[] salt = ServiceSecure.getNextSalt();
                 byte[] hashPassword = ServiceSecure.hash(password.toCharArray(), salt);
 
-                user = new User(firstName, lastName, login, new String(hashPassword), new String(salt), Roles.client);
-                user = DatabaseService.saveUser(user);
+                user = DatabaseService.saveUser(new User(firstName, lastName, login, new String(hashPassword), new String(salt), Roles.client));
             }
         }
         catch(Exception e){
@@ -56,14 +55,9 @@ public class ServiceUser {
      * @return boolean
      */
     public static Boolean checkUser(String login, String password){
-        try {
-            if(checkValidString(new String[]{login, password})){
-                String [] secret = DatabaseService.getSecrets(login, password);
-                return ServiceSecure.isExpectedPassword(password.toCharArray(), secret[1].getBytes(), secret[0].getBytes());
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
+        if(checkValidString(new String[]{login, password})){
+            String [] secret = DatabaseService.getSecrets(login, password);
+            return ServiceSecure.isExpectedPassword(password.toCharArray(), secret[1].getBytes(), secret[0].getBytes());
         }
         return false;
     }

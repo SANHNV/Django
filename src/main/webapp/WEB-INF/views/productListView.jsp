@@ -19,6 +19,7 @@
           <th>Code</th>
           <th>Name</th>
           <th>Price</th>
+          <th>Image</th>
           <th>Edit</th>
           <th>Delete</th>
        </tr>
@@ -27,6 +28,7 @@
              <td>${product.idProduct}</td>
              <td>${product.name}</td>
              <td>${product.price}</td>
+             <td><img src="${product.image}" width="100" height="100"> </td>
              <td>
                 <a href="editProduct?code=${product.idProduct}">Edit</a>
              </td>

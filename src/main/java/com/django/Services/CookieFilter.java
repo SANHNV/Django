@@ -39,6 +39,10 @@ public class CookieFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
+
+        //1. Check user session exist
+        //2. else create id
+        //3. if request got info user
  
         if(req.getCookies() != null){
 
