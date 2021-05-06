@@ -31,7 +31,7 @@ public class ProductListController {
     public String showProducts(@RequestParam(value = "error", defaultValue = "", required = true) String error, Model model) {
         System.out.println("controller products list");
         //get all products
-        List<Product> products = dbService.getProducts();
+        List<Product> products = DatabaseService.getProducts();
         model.addAttribute("productList",products);
         model.addAttribute("errorString", error);
         return "productListView";
@@ -43,7 +43,7 @@ public class ProductListController {
 
         Product product = new Product(0, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
 
-        dbService.saveProduct(product);
+        DatabaseService.saveProduct(product);
         //test
         //Product product = new Product(0, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
         //model.addAttribute("product", product);
@@ -54,7 +54,7 @@ public class ProductListController {
     public String editProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
         System.out.println("controller products get edit view");
 
-        Product product = dbService.getSingleProduct(Integer.parseInt( code));
+        Product product = DatabaseService.getSingleProduct(Integer.parseInt( code));
         if(product == null){
             return "redirect:/productList?errorString=ProductNotFound";
         }        
@@ -68,7 +68,7 @@ public class ProductListController {
         System.out.println("controller products edit product");
         //if product model valid
         if(product.getIdProduct() == 0){
-            dbService.saveProduct(product);
+            DatabaseService.saveProduct(product);
         } else {
             //TODO: add edit save
         }
@@ -81,7 +81,7 @@ public class ProductListController {
     public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
         System.out.println("controller delete product");
         //if or try
-        dbService.deleteProduct(Integer.parseInt(code));
+        DatabaseService.deleteProduct(Integer.parseInt(code));
         //else or catch
         model.addAttribute("errorString", "error with delete");
         return "redirect:/productList";
@@ -114,7 +114,7 @@ public class ProductListController {
             product = new Product(name,price,image,new Timestamp(date.getTime()),q);
         }
         
-        dbService.saveProduct(product);
+        DatabaseService.saveProduct(product);
         return "redirect:/productList";
     }
 }
