@@ -7,18 +7,26 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Sign In</title>
   </head>
   <body>
  
   <jsp:include page="_menu.jsp"></jsp:include>
 
-  <h3>Login</h3>
+  <h3>Sign In</h3>
 
   <p style="color: red;">${errorString}</p>
 
-  <form:form method="POST" action="/checkUser" modelAttribute="user">
+  <form:form method="POST" action="/addUser" modelAttribute="user">
     <table>
+      <tr>
+        <td><form:label path="firstName">FirstName</form:label></td>
+        <td><form:input type="text" required="true" path="firstName"/></td>
+      </tr>
+      <tr>
+        <td><form:label path="lastName">LastName</form:label></td>
+        <td><form:input type="text" required="true" path="lastName"/></td>
+      </tr>
       <tr>
         <td><form:label path="login">Login</form:label></td>
         <td><form:input type="text" required="true" path="login"/></td>

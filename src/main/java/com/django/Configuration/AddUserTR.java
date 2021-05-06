@@ -24,6 +24,15 @@ public class AddUserTR {
 	}
 
 	/**
+	 * Get User by login
+	 * @param login login user
+	 * @return user
+	 */
+    public User getUserByLogin(String login) {
+		return sessionFactory.getCurrentSession().createQuery("select d from User d where d.login = :login", User.class).setParameter("login", login).getSingleResult();
+	}
+
+	/**
 	 * Save new User
 	 * @param user user
 	 */
@@ -32,5 +41,13 @@ public class AddUserTR {
         session.save(user);
 	}
 
-	//TODO: Check login password
+	/**
+	 * Gte Salt and Password by login
+	 * @param login login
+	 * @return Password and Salt
+	 */
+	public String[] getSaltAndPasswordByLogin(String login){
+		User user= sessionFactory.getCurrentSession().createQuery("select d from User d where d.login = :login", User.class).setParameter("login", login).getSingleResult();
+		return new String [] {user.getPassword(), user.getSalt()};
+	}
 }
