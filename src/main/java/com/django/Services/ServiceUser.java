@@ -2,9 +2,6 @@ package com.django.Services;
 
 import com.django.Models.Roles;
 import com.django.Models.User;
-import com.django.Configuration.AddUserTR;
-
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ServiceUser {
     
@@ -14,34 +11,16 @@ public class ServiceUser {
      * @return user
      */
     public static User getUserById(Integer id){
-        User user = null;
-        try{
-            AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-            user = myApplicationContext.getBean(AddUserTR.class).getUserById(id);
-            myApplicationContext.close();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        return user;
+        return DatabaseService.getUserById(id);
     }
 
-        /**
+    /**
      * Get User by Login or null
      * @param login login user
      * @return user
      */
     public static User getUserByLogin(String login){
-        User user = null;
-        try{
-            AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-            user = myApplicationContext.getBean(AddUserTR.class).getUserByLogin(login);
-            myApplicationContext.close();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        return user;
+        return DatabaseService.getUserByLogin(login);
     }
 
     /**
@@ -57,19 +36,15 @@ public class ServiceUser {
         try{
             if(checkValidString(new String[]{firstName, lastName, login, password})){
                 byte[] salt = ServiceSecure.getNextSalt();
-                System.out.println("salt = " + new String(salt));
                 byte[] hashPassword = ServiceSecure.hash(password.toCharArray(), salt);
-                System.out.println("password = " + new String(hashPassword));
 
                 user = new User(firstName, lastName, login, new String(hashPassword), new String(salt), Roles.client);
-                AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-                myApplicationContext.getBean(AddUserTR.class).saveUser(user);
-                user = myApplicationContext.getBean(AddUserTR.class).getUserByLogin(login);
-                myApplicationContext.close();
+                user = DatabaseService.saveUser(user);
             }
         }
         catch(Exception e){
             e.printStackTrace();
+            user = null;
         }
         return user;
     }
@@ -81,11 +56,9 @@ public class ServiceUser {
      * @return boolean
      */
     public static Boolean checkUser(String login, String password){
-        try{
+        try {
             if(checkValidString(new String[]{login, password})){
-                AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-                String [] secret = myApplicationContext.getBean(AddUserTR.class).getSaltAndPasswordByLogin(login);
-                myApplicationContext.close();
+                String [] secret = DatabaseService.getSecrets(login, password);
                 return ServiceSecure.isExpectedPassword(password.toCharArray(), secret[1].getBytes(), secret[0].getBytes());
             }
         }
