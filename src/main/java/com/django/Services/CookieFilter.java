@@ -45,11 +45,17 @@ public class CookieFilter implements Filter {
         //3. if request got info user
  
         if(req.getCookies() != null){
-
+            
         }
         else if (req.getAttribute("user") != null){
             // Cookie cookie = new Cookie("user", "toto");
             // ((Object) response).addCookie(cookie);
+        }
+
+        if(session.getAttribute("user") == null){
+            if(req.getAttribute("user")!=null){
+                session.setAttribute("user", req.getAttribute("user"));
+            }
         }
 
         chain.doFilter(request, response);

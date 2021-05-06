@@ -40,9 +40,25 @@ public class ProductListController {
         return "createProductView";
     }
 
+    //TODO : delete ? no used
+    @RequestMapping(value ="/addProduct", method = RequestMethod.POST)
+    public String editProduct(@RequestBody Product product) {
+        //if product model valid
+        if(product.getIdProduct() == 0){
+            DatabaseService.saveProduct(product);
+        } else {
+            //TODO: add edit save
+        }
+        //else
+        // return "redirect:/productList?errorString=errorAddProduct";
+        return "redirect:/productList";
+    }
+
     @RequestMapping({"/deleteProduct"})
     public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
+        //if not
         DatabaseService.deleteProduct(Integer.parseInt(code));
+        //model.addAttribute("errorString", "error with delete");
         return "redirect:/productList";
     }
 

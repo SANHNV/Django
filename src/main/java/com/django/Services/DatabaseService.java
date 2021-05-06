@@ -12,6 +12,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class DatabaseService {
     
     //#region Products
+    /**
+     * 
+     * @param id
+     * @return
+     */
     public static Product getSingleProduct(int id){
         Product product = null;
         try {
@@ -24,6 +29,10 @@ public class DatabaseService {
         return product;
     } 
 
+    /**
+     * 
+     * @param p
+     */
     public static void saveProduct(Product p){
         try {
         AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
@@ -34,6 +43,10 @@ public class DatabaseService {
         }
     }
 
+    /**
+     * 
+     * @param id
+     */
     public static void deleteProduct(int id){
         try{
             AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
@@ -44,6 +57,10 @@ public class DatabaseService {
         }
     }
 
+    /**
+     * 
+     * @return
+     */
     public static List<Product> getProducts(){
         List<Product> products = null;
         try{
@@ -60,6 +77,11 @@ public class DatabaseService {
 
     //#region Users
 
+    /**
+     * 
+     * @param id
+     * @return
+     */
     public static User getUserById(int id){
         User user = null;
         try{
@@ -72,6 +94,11 @@ public class DatabaseService {
         return user;
     }
 
+    /**
+     * 
+     * @param user
+     * @return
+     */
     public static User saveUser(User user){
         try{
             AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
@@ -85,6 +112,11 @@ public class DatabaseService {
         return user;
     }
 
+    /**
+     * 
+     * @param login
+     * @return
+     */
     public static User getUserByLogin(String login){
         User user = null;
         try{
@@ -98,6 +130,12 @@ public class DatabaseService {
         return user;
     }
 
+    /**
+     * 
+     * @param login
+     * @param password
+     * @return
+     */
     public static String [] getSecrets(String login, String password){
         String [] secret = null;
         try 
