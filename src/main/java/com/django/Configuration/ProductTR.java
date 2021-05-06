@@ -48,7 +48,7 @@ public class ProductTR {
      */
 	public Product saveProduct(Product product){
 		Session session = sessionFactory.getCurrentSession();
-        session.save(product);
+        session.saveOrUpdate(product);
 		return product;
 	}
 
