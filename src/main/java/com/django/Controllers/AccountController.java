@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.django.Configuration.AddUserTR;
-import com.django.Models.Roles;
 import com.django.Models.User;
+import com.django.Services.DatabaseService;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class AccountController {
+
+    DatabaseService dbService = new DatabaseService();
 
     /**
      * Show login view
@@ -37,9 +37,7 @@ public class AccountController {
         System.out.println("controller view user info");
         User user = null;
         if(code != null){
-            AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-            user = myApplicationContext.getBean(AddUserTR.class).getUserById(code);
-            myApplicationContext.close();
+            dbService.getUserById(code);
         }
 
         if(user != null){
@@ -60,9 +58,7 @@ public class AccountController {
         System.out.println("controller add user");
         try{
             if(checkValidString(new String[]{firstName, lastName, login, password})){
-                AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-                myApplicationContext.getBean(AddUserTR.class).saveUser(new User(firstName, lastName, login, password, "salt", Roles.client));
-                myApplicationContext.close();
+                dbService.saveUser(firstName,lastName,login,password);
             }
             else{
                 ModelAndView model = new ModelAndView("loginView", "user", new User());

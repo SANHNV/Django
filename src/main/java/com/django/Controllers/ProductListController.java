@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.django.Models.Product;
-import com.django.Configuration.ProductTR;
+import com.django.Services.DatabaseService;
 
 //TODO: put all database TR in service
 
@@ -25,15 +25,14 @@ import com.django.Configuration.ProductTR;
 @Controller
 public class ProductListController {
     
+    DatabaseService dbService = new DatabaseService();
+
     @RequestMapping({"/productList"})
     public String showProducts(@RequestParam(value = "error", defaultValue = "", required = true) String error, Model model) {
         System.out.println("controller products list");
         //get all products
-        AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-        List<Product> products = myApplicationContext.getBean(ProductTR.class).getProducts();
+        List<Product> products = dbService.getProducts();
         model.addAttribute("productList",products);
-        System.out.println(products.size());
-        myApplicationContext.close();
         model.addAttribute("errorString", error);
         return "productListView";
     }
@@ -44,9 +43,7 @@ public class ProductListController {
 
         Product product = new Product(0, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
 
-        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-        myApplicationContext.getBean(ProductTR.class).saveProduct(product);
-        myApplicationContext.close();
+        dbService.saveProduct(product);
         //test
         //Product product = new Product(0, "Chartreuse", "34.5", "url", new Timestamp(System.currentTimeMillis()),10);
         //model.addAttribute("product", product);
@@ -57,9 +54,7 @@ public class ProductListController {
     public String editProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
         System.out.println("controller products get edit view");
 
-        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-        Product product = myApplicationContext.getBean(ProductTR.class).getProductById(Integer.parseInt(code));
-        myApplicationContext.close();
+        Product product = dbService.getSingleProduct(Integer.parseInt( code));
         if(product == null){
             return "redirect:/productList?errorString=ProductNotFound";
         }        
@@ -73,9 +68,7 @@ public class ProductListController {
         System.out.println("controller products edit product");
         //if product model valid
         if(product.getIdProduct() == 0){
-            AnnotationConfigApplicationContext  myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-            myApplicationContext.getBean(ProductTR.class).saveProduct(product);
-            myApplicationContext.close();
+            dbService.saveProduct(product);
         } else {
             //TODO: add edit save
         }
@@ -88,9 +81,7 @@ public class ProductListController {
     public String deleteProduct(@RequestParam(value = "code", defaultValue = "0", required = true) String code, Model model) {
         System.out.println("controller delete product");
         //if or try
-        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-        myApplicationContext.getBean(ProductTR.class).deleteProduct(Integer.parseInt(code));
-        myApplicationContext.close();
+        dbService.deleteProduct(Integer.parseInt(code));
         //else or catch
         model.addAttribute("errorString", "error with delete");
         return "redirect:/productList";
@@ -108,26 +99,22 @@ public class ProductListController {
 
     @RequestMapping(value = "/createP", method = RequestMethod.POST)
     public String createP(String idProduct,String name, String price, String image,String limitDate, String quantity){
-        System.out.println(idProduct);
         Date date = null;
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(limitDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }  
-        Product p = null;
+        Product product = null;
         Double q = Double.parseDouble(quantity);
         if(idProduct != null){
-            p = new Product(Integer.parseInt(idProduct),name,price,image,new Timestamp(date.getTime()),q);
+            product = new Product(Integer.parseInt(idProduct),name,price,image,new Timestamp(date.getTime()),q);
         }
         else{
-            p = new Product(name,price,image,new Timestamp(date.getTime()),q);
+            product = new Product(name,price,image,new Timestamp(date.getTime()),q);
         }
         
-        
-        AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
-        myApplicationContext.getBean(ProductTR.class).saveProduct(p);
-        myApplicationContext.close();
+        dbService.saveProduct(product);
         return "redirect:/productList";
     }
 }
