@@ -20,10 +20,18 @@ public class DatabaseService {
     public static Product getSingleProduct(int id){
         Product product = null;
         try {
+            // Attention : ce code crée une nouvelle application Spring, ce qui est très coûteux !
+	    // Il est grandement préférable de générer un minimum (en principe 1) AnnotationContext pour l'ensemble de
+	    // l'application, et de récupérer ce contexte (ou le Bean directement) à l'aide :
+	    // - d'une annotation @Component sur la classe (ici DatabaseService)
+	    // - d'une injection de dépendance dans la classe (par exemple, un field @Autowired ProductTR dans la classe).
+	    //
+	    // Le fait de recréer une ApplicationContext à chaque appel de méthode casse également la configuration du
+	    // TransactionManager (et donc de la SessionFactory d'Hibernate) car ceux-ci sont recréés à chaque appel.
             AnnotationConfigApplicationContext myApplicationContext = new AnnotationConfigApplicationContext("com.django");
             product = myApplicationContext.getBean(ProductTR.class).getProductById(id);
             myApplicationContext.close();
-        } catch (Exception e){
+        } catch (Exception e){ // voir commentaire sur les exceptions dans les contrôleurs
             e.printStackTrace();
         }
         return product;

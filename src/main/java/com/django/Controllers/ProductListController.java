@@ -73,12 +73,12 @@ public class ProductListController {
         Date date = null;
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(limitDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException e) { //TB pour le catch specifique
+            e.printStackTrace(); // il serait plus intéressant de retourner un message d'erreur à l'appelant (avec un HTTP Status "Bad Request" par exemple)
         }  
         Product product = null;
         Double q = Double.parseDouble(quantity);
-        if(idProduct != null){
+        if(idProduct != null && !idProduct.isEmpty()){
             product = new Product(Integer.parseInt(idProduct),name,price,image,new Timestamp(date.getTime()),q);
         }
         else{

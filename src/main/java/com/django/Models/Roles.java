@@ -1,6 +1,6 @@
 package com.django.Models;
 
-public enum Roles{
+public enum Roles{ //TB
     client,
     adminLocal,
     adminGlobal
