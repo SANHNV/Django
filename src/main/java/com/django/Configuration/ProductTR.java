@@ -77,7 +77,10 @@ public class ProductTR {
 		if(p != null){
 			Session session = sessionFactory.getCurrentSession();
 			session.delete(p);
-			session.flush();
+			session.flush(); // pourquoi pas, mais préférer l'usage direct de transactions.
+			// Le problème ici est qu'un appel métier (deleteProduct) impacte le comportement de la session.
+			// Ce n'est certainement pas un soucis dans ce cas simple, mais en cas de problème de performance,
+			// ce genre d'effet de bord est difficile à débugger.
 		}
 	}
 }

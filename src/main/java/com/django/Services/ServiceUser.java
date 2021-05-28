@@ -35,13 +35,13 @@ public class ServiceUser {
         User user = null;
         try{
             if(checkValidString(new String[]{firstName, lastName, login, password})){
-                byte[] salt = ServiceSecure.getNextSalt();
+                byte[] salt = ServiceSecure.getNextSalt(); //TB
                 byte[] hashPassword = ServiceSecure.hash(password.toCharArray(), salt);
 
                 user = DatabaseService.saveUser(new User(firstName, lastName, login, new String(hashPassword), new String(salt), Roles.client));
-            }
+            } // else ? il est dommage de masquer les erreurs
         }
-        catch(Exception e){
+        catch(Exception e){ // voir commentaire sur les exceptions dans les contrôleurs
             e.printStackTrace();
             user = null;
         }
@@ -59,7 +59,8 @@ public class ServiceUser {
             String [] secret = DatabaseService.getSecrets(login, password);
             return ServiceSecure.isExpectedPassword(password.toCharArray(), secret[1].getBytes(), secret[0].getBytes());
         }
-        return false;
+        return false; //Attention : si cette méthode retourne 'false', comment savoir si le login/mot de passe sont incorrects,
+	// ou si l'appelant a mal transmis les paramètres (par exemple, avec un espace restant à la fin du login ou mot de passe) ?
     }
 
     //#region Private Properties

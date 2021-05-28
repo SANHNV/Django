@@ -22,7 +22,8 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:5.4.10.Final'
 
     // -- Partie III -- //
-    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
+    //implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
+    implementation group: 'com.h2database', name: 'h2', version: '1.3.175' // pour correction - v1.3.175+ is required for MIN_VALUE to generate proper beans IDs
     implementation "org.springframework:spring-orm:${springframeworkVersion}"
 
     // -- Partie IV -- //
